@@ -138,6 +138,25 @@
       .dino-text {
         flex: 1;
       }
+      @media (max-width: 767px) {
+        .dino-info {
+          flex-direction: column;
+        }
+        .dino-image {
+          max-width: 100%;
+          margin-top: 20px;
+        }
+
+        .nav-icons {
+          position: static;
+          margin-top: 20px;
+          justify-content: center;
+        }
+
+        header {
+          width: 100%;
+        }
+      }
     </style>
   </head>
   <body>
@@ -340,7 +359,7 @@
         dinoInfos.forEach((info) => {
           const rect = info.getBoundingClientRect(); // get size & position of the element relative to viewport
           const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight; // check if element is fully visible within the viewport
-          if (isVisible) {
+          if (window.innerWidth > 767 ? isVisible : true) {
             info.classList.add("visible");
           }
         });
