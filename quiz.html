@@ -156,12 +156,29 @@
           flex-direction: column;
         }
         .dino-image {
-          min-height: 350px;
+          background-size: contain;
           width: 100%;
         }
-        .dino-info {
-          margin: 0 10px;
-          max-width: 100%;
+        .question {
+          text-align: center;
+        }
+        .options {
+          margin: 0;
+          width: 100%;
+        }
+      }
+      @media (min-width: 768px) and (max-width: 1024px) {
+        .options {
+          margin: 0;
+          width: 100%;
+        }
+
+        .dino-image {
+          background-size: contain;
+          background-position: center;
+          min-height: 350px;
+          width: 100%;
+          flex: 1;
         }
       }
     </style>
