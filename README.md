@@ -6,7 +6,7 @@ Dinosaur Discovery Zone is an interactive web experience that takes users on a j
 The webpage tells the story of dinosaurs from the Triassic period to their extinction, using a combination of informative text, images, and interactive elements to create an immersive learning experience.
 
 ## 🎨 Figma Design
-Figma Link: [https://www.figma.com/design/yfT7mhTMtcQKjgk2UHyA6u/Project-1-Figma?node-id=0-1&t=cKT5Gnd5fpQaeyFW-1](#)  
+Figma Link: https://www.figma.com/design/yfT7mhTMtcQKjgk2UHyA6u/Project-1-Figma?node-id=0-1&t=cKT5Gnd5fpQaeyFW-1
 
 The design process began with creating the home page. I first laid out all the components I wanted to have on my home page, such as
 - The layout of the images, text, and timeline
