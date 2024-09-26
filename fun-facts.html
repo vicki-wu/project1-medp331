@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinosaur Discovery Zone - Fun Facts</title>
+    <style>
+      body,
+      html {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f1e9;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      header {
+        background-color: #d8c3a5;
+        padding: 20px;
+        position: relative;
+      }
+      h1,
+      h2 {
+        color: #4a3e38;
+      }
+      .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: slideIn 0.5s ease-in-out;
+      }
+      @keyframes slideIn {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .dino-emoji {
+        font-size: 2em;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+      .dino-emoji:hover {
+        animation: dance 0.5s infinite;
+      }
+      @keyframes dance {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+      }
+      .nav-icons {
+        position: absolute;
+        right: 20px;
+        top: 34%;
+        display: flex;
+        gap: 10px;
+      }
+      .nav-icons a {
+        font-size: 1.5em;
+        color: #e98074;
+        text-decoration: none;
+      }
+      .nav-icons button.music-toggle {
+        font-size: 1.5em;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      .fun-facts-container {
+        display: flex;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .dino-image {
+        flex: 1;
+        max-width: 40%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .facts-list {
+        flex: 1;
+        padding: 20px;
+        background-color: #fff;
+        overflow-y: auto;
+        max-height: 600px;
+      }
+      .fact-item {
+        margin-bottom: 20px;
+        padding: 15px;
+        background-color: #f4f1e9;
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out,
+          background-color 0.3s ease-in-out;
+      }
+      .fact-item:hover {
+        transform: translateX(5px);
+        background-color: #e0d8c7;
+      }
+      .fact-item h3 {
+        margin-top: 0;
+        color: #e98074;
+      }
+      .fact-item p {
+        margin-bottom: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-icons">
+        <a href="index.html">🏠</a>
+        <a href="fun-facts.html">ⓘ</a>
+        <a href="quiz.html">❓</a>
+        <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+      </div>
+      <div class="title-container">
+        <h1>Dinosaur Discovery Zone</h1>
+        <span class="dino-emoji" id="dancingDino">🦕</span>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Dino Fun Facts</h2>
+
+      <div class="fun-facts-container">
+        <div class="dino-image">
+          <img src="assets/dino.png" alt="Dinosaur" />
+        </div>
+        <div class="facts-list">
+          <div class="fact-item">
+            <h3>T-Rex Teeth 🦷</h3>
+            <p>
+              Tyrannosaurus Rex had teeth up to 8 inches (20 cm) long! These
+              serrated teeth were perfect for tearing through flesh and crushing
+              bones.
+            </p>
+          </div>
+          <div class="fact-item">
+            <h3>Tiny Brain 🧠</h3>
+            <p>
+              Stegosaurus had a brain roughly the size of a walnut, weighing
+              only about 80 grams. Despite this, it was successful for over 10
+              million years.
+            </p>
+          </div>
+          <div class="fact-item">
+            <h3>Flying Giants 🦅</h3>
+            <p>
+              Pterosaurs like Quetzalcoatlus could have a wingspan up to 33 feet
+              (10 meters)! This made them the largest known flying creatures of
+              all time.
+            </p>
+          </div>
+          <div class="fact-item">
+            <h3>Dino Speed 🏃‍♂️</h3>
+            <p>
+              The fastest known dinosaur, the Compsognathus, could run at speeds
+              of up to 40 mph (64 km/h)! That's faster than the average speed of
+              a racehorse.
+            </p>
+          </div>
+          <div class="fact-item">
+            <h3>Dino Longevity 🦕</h3>
+            <p>
+              Dinosaurs roamed the Earth for about 165 million years, from the
+              Triassic period around 230 million years ago until their
+              extinction about 65 million years ago.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      let audio = new Audio("assets/music.mp3");
+      audio.loop = true;
+      audio.volume = 0.1;
+
+      function toggleMusic() {
+        if (audio.paused) {
+          audio.play();
+          document.querySelector(".music-toggle").textContent = "🔊";
+        } else {
+          audio.pause();
+          document.querySelector(".music-toggle").textContent = "🎵";
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinosaur Discovery Zone</title>
+    <style>
+      body,
+      html {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f1e9;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      header {
+        background-color: #d8c3a5;
+        padding: 20px;
+        position: relative;
+      }
+      h1,
+      h2 {
+        color: #4a3e38;
+      }
+      .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: slideIn 0.5s ease-in-out;
+      }
+      @keyframes slideIn {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .dino-emoji {
+        font-size: 2em;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+      .dino-emoji:hover {
+        animation: dance 0.5s infinite;
+      }
+      @keyframes dance {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+      }
+      .nav-icons {
+        position: absolute;
+        right: 20px;
+        top: 34%;
+        display: flex;
+        gap: 10px;
+      }
+      .nav-icons a {
+        font-size: 1.5em;
+        color: #e98074;
+        text-decoration: none;
+      }
+      .nav-icons button.music-toggle {
+        font-size: 1.5em;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      .timeline {
+        display: flex;
+        justify-content: space-between;
+        padding: 40px 0;
+        position: relative;
+      }
+      .timeline::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 4px;
+        background-color: #8e8d8a;
+      }
+      .era {
+        background-color: #e98074;
+        color: white;
+        padding: 16px;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+        z-index: 2;
+        width: 100px;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        font-weight: bold;
+      }
+      .era:hover {
+        background-color: #e85a4f;
+        transform: scale(1.1);
+      }
+      .dino-info {
+        display: flex;
+        align-items: center;
+        margin-bottom: 50px;
+        opacity: 0;
+        transition: opacity 0.5s, transform 0.5s;
+      }
+      .dino-info.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .dino-image {
+        max-width: 50%;
+        margin-left: 50px;
+      }
+      .dino-image img {
+        width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .dino-text {
+        flex: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-icons">
+        <a href="index.html">🏠</a>
+        <a href="fun-facts.html">ⓘ</a>
+        <a href="quiz.html">❓</a>
+        <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+      </div>
+      <div class="title-container">
+        <h1>Dinosaur Discovery Zone</h1>
+        <span class="dino-emoji" id="dancingDino">🦕</span>
+      </div>
+    </header>
+    <div class="container">
+      <div class="timeline">
+        <div class="era" onclick="scrollToEra('triassic')">
+          Triassic<br />251-201 MYA
+        </div>
+        <div class="era" onclick="scrollToEra('jurassic')">
+          Jurassic<br />201-145 MYA
+        </div>
+        <div class="era" onclick="scrollToEra('cretaceous')">
+          Cretaceous<br />145-66 MYA
+        </div>
+        <div class="era" onclick="scrollToEra('extinction')">
+          Extinction<br />66 MYA
+        </div>
+      </div>
+      <div id="triassic" class="dino-info">
+        <div class="dino-text">
+          <h2>Triassic Period (251-201 million years ago)</h2>
+          <p>
+            The Triassic period marked the beginning of the age of dinosaurs.
+            Following the Permian-Triassic extinction event, which wiped out
+            nearly 95% of marine species and 70% of terrestrial vertebrate
+            species, the Earth was ripe for new life forms to emerge.
+          </p>
+          <p>
+            Early dinosaurs evolved alongside other reptiles, and by the end of
+            this period, they had become the dominant land animals. The climate
+            during this time was generally hot and dry, with much of the land
+            concentrated in the supercontinent Pangaea.
+          </p>
+          <p>Notable dinosaurs from this period include:</p>
+          <ul>
+            <li>
+              Coelophysis: One of the earliest known dinosaurs, this small,
+              agile predator was about 3 meters long.
+            </li>
+            <li>
+              Plateosaurus: An early example of a prosauropod, it was one of the
+              first large plant-eating dinosaurs.
+            </li>
+            <li>
+              Eoraptor: A small, bipedal dinosaur that is considered one of the
+              earliest dinosaurs ever discovered.
+            </li>
+          </ul>
+        </div>
+        <div class="dino-image">
+          <img src="assets/triassic.png" />
+        </div>
+      </div>
+
+      <div id="jurassic" class="dino-info">
+        <div class="dino-text">
+          <h2>Jurassic Period (201-145 million years ago)</h2>
+          <p>
+            The Jurassic period saw a significant diversification of dinosaur
+            species. The supercontinent Pangaea began to break apart, leading to
+            the formation of new ecosystems and the evolution of new dinosaur
+            species to fill these niches.
+          </p>
+          <p>
+            This era witnessed the rise of long-necked sauropods, which grew to
+            enormous sizes, and the first appearance of birds. The climate was
+            generally warmer and more humid than in the Triassic, with lush
+            vegetation covering much of the land.
+          </p>
+          <p>Some iconic dinosaurs from the Jurassic period include:</p>
+          <ul>
+            <li>
+              Brachiosaurus: A massive, long-necked herbivore that could reach
+              heights of up to 16 meters.
+            </li>
+            <li>
+              Stegosaurus: Known for the distinctive plates along its back and
+              spikes on its tail.
+            </li>
+            <li>
+              Allosaurus: A large carnivorous theropod, often considered the
+              "lion" of the Jurassic period.
+            </li>
+            <li>
+              Archaeopteryx: Often called the "first bird," this small,
+              feathered dinosaur provides a link between non-avian dinosaurs and
+              modern birds.
+            </li>
+          </ul>
+        </div>
+        <div class="dino-image">
+          <img src="assets/jurassic.png" />
+        </div>
+      </div>
+
+      <div id="cretaceous" class="dino-info">
+        <div class="dino-text">
+          <h2>Cretaceous Period (145-66 million years ago)</h2>
+          <p>
+            The Cretaceous period was the last and longest period of the
+            dinosaur age. It was a time of continued continental breakup, with
+            the Atlantic Ocean widening and South America separating from
+            Africa. The climate was generally warm, with high sea levels
+            creating numerous shallow inland seas.
+          </p>
+          <p>
+            This period saw the evolution of some of the most famous dinosaur
+            species, as well as the diversification of flowering plants, which
+            became the dominant form of vegetation by the end of the era.
+          </p>
+          <p>Notable dinosaurs from the Cretaceous include:</p>
+          <ul>
+            <li>
+              Tyrannosaurus Rex: Perhaps the most famous dinosaur, this apex
+              predator could grow up to 12 meters long.
+            </li>
+            <li>
+              Triceratops: A large herbivore known for its distinctive frill and
+              three facial horns.
+            </li>
+            <li>
+              Velociraptor: A small, agile predator made famous by the "Jurassic
+              Park" franchise, though in reality, it was much smaller than
+              depicted in the films.
+            </li>
+            <li>
+              Ankylosaurus: A heavily armored herbivore with a club-like tail
+              used for defense.
+            </li>
+            <li>
+              Spinosaurus: The largest known carnivorous dinosaur, with a
+              distinctive sail-like structure on its back.
+            </li>
+          </ul>
+        </div>
+        <div class="dino-image">
+          <img src="assets/cretaceous.png" />
+        </div>
+      </div>
+
+      <div id="extinction" class="dino-info">
+        <div class="dino-text">
+          <h2>Mass Extinction (66 million years ago)</h2>
+          <p>
+            The age of dinosaurs came to an abrupt end about 66 million years
+            ago with a mass extinction event known as the Cretaceous-Paleogene
+            (K-Pg) extinction. This event wiped out approximately 75% of plant
+            and animal species on Earth, including most dinosaurs.
+          </p>
+          <p>
+            The leading theory for this extinction is the impact of a massive
+            asteroid or comet, which struck the Earth near the present-day
+            Yucatan Peninsula in Mexico. This impact would have caused:
+          </p>
+          <ul>
+            <li>
+              Global climate change, including a prolonged period of cooling
+            </li>
+            <li>Massive tsunamis and widespread fires</li>
+            <li>
+              A dust cloud that blocked sunlight, inhibiting photosynthesis
+            </li>
+            <li>Acid rain from vaporized rock</li>
+          </ul>
+          <p>
+            While this event marked the end of most dinosaur species, it paved
+            the way for the rise and diversification of mammals, eventually
+            leading to the evolution of humans millions of years later. It's
+            worth noting that not all dinosaurs went extinct – the lineage of
+            theropod dinosaurs that includes modern birds survived and continued
+            to evolve.
+          </p>
+        </div>
+        <div class="dino-image">
+          <img src="assets/extinction.png" />
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function scrollToEra(era) {
+        const element = document.getElementById(era);
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+
+      function checkVisibility() {
+        const dinoInfos = document.querySelectorAll(".dino-info");
+        dinoInfos.forEach((info) => {
+          const rect = info.getBoundingClientRect(); // get size & position of the element relative to viewport
+          const isVisible = rect.top >= 0 && rect.bottom <= window.innerHeight; // check if element is fully visible within the viewport
+          if (isVisible) {
+            info.classList.add("visible");
+          }
+        });
+      }
+
+      window.addEventListener("scroll", checkVisibility);
+      checkVisibility();
+
+      let audio = new Audio("assets/music.mp3");
+      audio.loop = true;
+      audio.volume = 0.1;
+
+      function toggleMusic() {
+        if (audio.paused) {
+          audio.play();
+          document.querySelector(".music-toggle").textContent = "🔊";
+        } else {
+          audio.pause();
+          document.querySelector(".music-toggle").textContent = "🎵";
+        }
+      }
+    </script>
+  </body>
+</html>

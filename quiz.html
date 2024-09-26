@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dinosaur Discovery Zone - Dino Quiz</title>
+    <style>
+      body,
+      html {
+        font-family: sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f1e9;
+      }
+      .container {
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      header {
+        background-color: #d8c3a5;
+        padding: 20px;
+        position: relative;
+      }
+      h1,
+      h2 {
+        color: #4a3e38;
+        text-align: center;
+      }
+      .title-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: slideIn 0.5s ease-in-out;
+      }
+      @keyframes slideIn {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+      .dino-emoji {
+        font-size: 2em;
+        margin-left: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+      .dino-emoji:hover {
+        animation: dance 0.5s infinite;
+      }
+      @keyframes dance {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-10px) rotate(5deg);
+        }
+      }
+      .nav-icons {
+        position: absolute;
+        right: 20px;
+        top: 34%;
+        display: flex;
+        gap: 10px;
+      }
+      .nav-icons a {
+        font-size: 1.5em;
+        color: #e98074;
+        text-decoration: none;
+      }
+      .nav-icons button.music-toggle {
+        font-size: 1.5em;
+        cursor: pointer;
+        background: none;
+        border: none;
+      }
+      .quiz-container {
+        display: flex;
+        background-color: #eae7dc;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      }
+      .quiz-content {
+        flex: 1;
+        padding: 30px;
+      }
+      .dino-image {
+        flex: 1;
+        background-image: url("assets/dino2.png");
+        background-size: cover;
+        background-position: center;
+        min-height: 400px;
+      }
+      .question {
+        margin-bottom: 20px;
+        margin-left: 30px;
+      }
+      .options {
+        display: flex;
+        margin-left: 80px;
+        flex-direction: column;
+        width: 300px;
+      }
+      .option {
+        margin: 5px 0;
+        padding: 10px;
+        background-color: #e98074;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      .option:hover {
+        background-color: #e85a4f;
+        transform: translateX(5px);
+      }
+      #result {
+        margin-top: 20px;
+        font-weight: bold;
+        text-align: center;
+      }
+      #next-btn,
+      #restart-btn {
+        margin: 20px auto;
+        padding: 10px 20px;
+        background-color: #e98074;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s, transform 0.3s;
+      }
+      #next-btn:hover,
+      #restart-btn:hover {
+        background-color: #e85a4f;
+        transform: translateY(-3px);
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="nav-icons">
+        <a href="index.html">🏠</a>
+        <a href="fun-facts.html">ⓘ</a>
+        <a href="quiz.html">❓</a>
+        <button class="music-toggle" onclick="toggleMusic()">🎵</button>
+      </div>
+      <div class="title-container">
+        <h1>Dinosaur Discovery Zone</h1>
+        <span class="dino-emoji" id="dancingDino">🦕</span>
+      </div>
+    </header>
+
+    <div class="container">
+      <h2>Dino Quiz 📝</h2>
+      <div class="quiz-container">
+        <div class="quiz-content">
+          <div id="question-container"></div>
+          <div id="result"></div>
+          <button id="next-btn" style="display: none">Next Question</button>
+          <button id="restart-btn" style="display: none">Restart Quiz</button>
+        </div>
+        <div class="dino-image"></div>
+      </div>
+    </div>
+
+    <script>
+      const quizData = [
+        {
+          question: "Which period came first in dinosaur history?",
+          options: ["Jurassic", "Cretaceous", "Triassic"],
+          correct: 2,
+        },
+        {
+          question: "Which dinosaur is known for its long neck and tail?",
+          options: ["Tyrannosaurus Rex", "Brachiosaurus", "Velociraptor"],
+          correct: 1,
+        },
+        {
+          question: "What caused the extinction of most dinosaurs?",
+          options: ["Volcanic eruptions", "Asteroid impact", "Climate change"],
+          correct: 1,
+        },
+        {
+          question: "Which of these is not a carnivorous dinosaur?",
+          options: ["Allosaurus", "Spinosaurus", "Stegosaurus"],
+          correct: 2,
+        },
+        {
+          question: "Approximately how long did dinosaurs roam the Earth?",
+          options: [
+            "65 million years",
+            "165 million years",
+            "265 million years",
+          ],
+          correct: 1,
+        },
+      ];
+
+      let currentQuestion = 0;
+      let score = 0;
+
+      function loadQuestion() {
+        const questionContainer = document.getElementById("question-container");
+        const question = quizData[currentQuestion];
+
+        let html = `<div class="question"><h3>${question.question}</h3></div> 
+                    <div class="options">`;
+
+        question.options.forEach((option, index) => {
+          html += `<button class="option" onclick="checkAnswer(${index})">${option}</button>`;
+        }); // loops through array and creates a button for each option,
+        // calls checkAnswer() and passes index of selected option
+
+        html += "</div>";
+        questionContainer.innerHTML = html; // insert generated HTML string to display current question/answer
+      }
+
+      function checkAnswer(selected) {
+        const question = quizData[currentQuestion];
+        const result = document.getElementById("result");
+        const options = document.querySelectorAll(".option");
+
+        options.forEach((option) => (option.disabled = true));
+
+        if (selected === question.correct) {
+          score++;
+          result.textContent = "Correct!";
+          result.style.color = "green";
+        } else {
+          result.textContent =
+            "Incorrect. The correct answer is: " +
+            question.options[question.correct];
+          result.style.color = "red";
+        }
+
+        document.getElementById("next-btn").style.display = "block";
+      }
+
+      function nextQuestion() {
+        currentQuestion++;
+        if (currentQuestion < quizData.length) {
+          document.getElementById("next-btn").style.display = "none";
+          document.getElementById("result").textContent = "";
+          loadQuestion();
+        } else {
+          showScore();
+        }
+      }
+
+      function showScore() {
+        const questionContainer = document.getElementById("question-container");
+        const result = document.getElementById("result");
+        questionContainer.innerHTML = "";
+        result.textContent = `Quiz completed! Your score: ${score}/${quizData.length}`;
+        document.getElementById("next-btn").style.display = "none";
+        document.getElementById("restart-btn").style.display = "block";
+      }
+
+      function restartQuiz() {
+        currentQuestion = 0;
+        score = 0;
+        result.textContent = "";
+        document.getElementById("restart-btn").style.display = "none";
+        loadQuestion();
+      }
+
+      loadQuestion();
+
+      document
+        .getElementById("next-btn")
+        .addEventListener("click", nextQuestion);
+      document
+        .getElementById("restart-btn")
+        .addEventListener("click", restartQuiz);
+
+      let audio = new Audio("assets/music.mp3");
+      audio.loop = true;
+      audio.volume = 0.1;
+
+      function toggleMusic() {
+        if (audio.paused) {
+          audio.play();
+          document.querySelector(".music-toggle").textContent = "🔊";
+        } else {
+          audio.pause();
+          document.querySelector(".music-toggle").textContent = "🎵";
+        }
+      }
+    </script>
+  </body>
+</html>
