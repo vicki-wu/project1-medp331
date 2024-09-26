@@ -39,7 +39,7 @@ I then drafted out how I wanted to format my fun facts and quiz page, which incl
 - **Design**: Figma
 
 ## 🌐 Live Demo
-Experience the Dinosaur Discovery Zone: [https://vicki-wu.github.io/project1-medp331/](#)
+Experience the Dinosaur Discovery Zone: https://vicki-wu.github.io/project1-medp331/
 
 ## 🙏 Credits
 - Images: Google Images
